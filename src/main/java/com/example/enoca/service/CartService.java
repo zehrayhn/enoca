@@ -6,9 +6,6 @@ import com.example.enoca.dto.request.UpdateCartRequest;
 import com.example.enoca.dto.response.AddProductToCartResponse;
 import com.example.enoca.dto.response.RemoveProductFromCartResponse;
 import com.example.enoca.entity.Cart;
-import com.example.enoca.entity.Product;
-import com.example.enoca.exception.BusinessException;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;

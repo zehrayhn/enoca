@@ -5,7 +5,6 @@ import com.example.enoca.dto.request.RemoveProductFromCartRequest;
 import com.example.enoca.dto.request.UpdateCartRequest;
 import com.example.enoca.dto.response.AddProductToCartResponse;
 import com.example.enoca.dto.response.RemoveProductFromCartResponse;
-import com.example.enoca.dto.response.UpdateCartResponse;
 import com.example.enoca.service.CartService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

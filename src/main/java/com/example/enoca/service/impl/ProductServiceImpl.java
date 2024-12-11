@@ -5,7 +5,6 @@ import com.example.enoca.dto.request.UpdateProductRequest;
 import com.example.enoca.dto.response.CreateProductResponse;
 import com.example.enoca.dto.response.GetProductResponse;
 import com.example.enoca.dto.response.UpdateProductResponse;
-import com.example.enoca.entity.Customer;
 import com.example.enoca.entity.Product;
 import com.example.enoca.exception.BusinessException;
 import com.example.enoca.mapper.ProductMapper;
@@ -23,7 +22,6 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public GetProductResponse getProduct(int productId) {
         Product product = findProductById(productId);
-
         return ProductMapper.INSTANCE.getProductResponseMapper(product);
     }
     @Override

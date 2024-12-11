@@ -4,7 +4,6 @@ import com.example.enoca.dto.request.AddProductToCartRequest;
 import com.example.enoca.dto.request.RemoveProductFromCartRequest;
 import com.example.enoca.dto.request.UpdateCartRequest;
 import com.example.enoca.dto.response.AddProductToCartResponse;
-import com.example.enoca.dto.response.GetCartResponse;
 import com.example.enoca.dto.response.RemoveProductFromCartResponse;
 import com.example.enoca.entity.Cart;
 import com.example.enoca.entity.CartItem;
@@ -12,9 +11,9 @@ import com.example.enoca.entity.Product;
 import com.example.enoca.exception.BusinessException;
 import com.example.enoca.mapper.CartMapper;
 import com.example.enoca.repository.CartRepository;
-import com.example.enoca.repository.ProductRepository;
 import com.example.enoca.service.CartService;
 import com.example.enoca.service.ProductService;
+import com.example.enoca.service.helper.CartServiceHelper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,8 +27,8 @@ import java.util.Objects;
 @Service
 public class CartServiceImpl implements CartService {
     private final CartRepository cartRepository;
-    private final ProductRepository productRepository;
     private final ProductService productService;
+    private final CartServiceHelper cartServiceHelper;
     @Override
     public ResponseEntity<?> getCart(int cartId) {
         Cart cart=findCartById(cartId);
@@ -48,12 +47,12 @@ public class CartServiceImpl implements CartService {
                     AddProductToCartRequest request = new AddProductToCartRequest();
                     request.setProductId(update.getProductId());
                     request.setQuantity(update.getQuantity());
-                    addProductToCart(cart.getId(), request);
+                    cartServiceHelper.addProductToCartProxy(cart.getId(), request);
                     break;
                 case "REMOVE": // Ürünü sepetten çıkar
                     RemoveProductFromCartRequest removeProductFromCartRequest=new RemoveProductFromCartRequest();
                     removeProductFromCartRequest.setQuantity(update.getQuantity());
-                    removeProductFromCart(cart.getId(), update.getProductId(),removeProductFromCartRequest);
+                    cartServiceHelper.removeProductFromCartProxy(cart.getId(), update.getProductId(), removeProductFromCartRequest);
                     break;
 
                 default:
