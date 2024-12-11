@@ -19,6 +19,5 @@ public interface CartService {
     AddProductToCartResponse addProductToCart(int cartId, AddProductToCartRequest request);
     RemoveProductFromCartResponse removeProductFromCart(int cartId, int productId, RemoveProductFromCartRequest request);
     void emptyCart(int cartId);
-    Product findProductById(int productId);
     Cart findCartById(int cartId);
 }

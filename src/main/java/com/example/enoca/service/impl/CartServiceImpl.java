@@ -14,6 +14,7 @@ import com.example.enoca.mapper.CartMapper;
 import com.example.enoca.repository.CartRepository;
 import com.example.enoca.repository.ProductRepository;
 import com.example.enoca.service.CartService;
+import com.example.enoca.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,7 @@ import java.util.Objects;
 public class CartServiceImpl implements CartService {
     private final CartRepository cartRepository;
     private final ProductRepository productRepository;
+    private final ProductService productService;
     @Override
     public ResponseEntity<?> getCart(int cartId) {
         Cart cart=findCartById(cartId);
@@ -64,7 +66,7 @@ public class CartServiceImpl implements CartService {
     @Transactional
     public AddProductToCartResponse addProductToCart(int cartId, AddProductToCartRequest request) {
         Cart cart = findCartById(cartId);
-        Product product = findProductById(request.getProductId());
+        Product product = productService.findProductById(request.getProductId());
 
         int currentQuantityInCart = cart.getItems().stream()
                 .filter(item -> Objects.equals(item.getProduct().getId(), product.getId()))
@@ -115,7 +117,7 @@ public class CartServiceImpl implements CartService {
         Cart cart = findCartById(cartId);
 
         // Ürünü kontrol et
-        Product product = findProductById(productId);
+        Product product = productService.findProductById(productId);
 
         // Sepette ürün var mı kontrol et
         CartItem cartItem = cart.getItems().stream()
@@ -154,13 +156,6 @@ public class CartServiceImpl implements CartService {
         cart.getItems().clear();
         cart.setTotalAmount(0);
         cartRepository.save(cart);
-    }
-
-
-
-    public Product findProductById(int productId) {
-        return productRepository.findById(productId)
-                .orElseThrow(() -> new BusinessException(HttpStatus.NOT_FOUND, "Ürün bulunamadı: " + productId));
     }
 
     public Cart findCartById(int cartId) {
