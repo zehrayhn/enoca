@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 public class BusinessException extends RuntimeException {
 
     private final HttpStatus httpStatus;
+
     private final String error;
     public BusinessException(HttpStatus httpStatus, String error) {
         super(String.join(", ", error));

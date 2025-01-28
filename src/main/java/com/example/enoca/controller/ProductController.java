@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/api/v1/products")
 public class ProductController {
     private final ProductService productService;
-
     @GetMapping("/{id}")
     public GetProductResponse getProduct(@PathVariable int id){
         return productService.getProduct(id);

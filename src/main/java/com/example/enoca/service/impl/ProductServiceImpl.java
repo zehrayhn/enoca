@@ -34,11 +34,8 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public UpdateProductResponse updateProduct(int id, UpdateProductRequest updateProductRequest) {
         Product existingProduct = findProductById(id);
-
         ProductMapper.INSTANCE.updateProductMapper(updateProductRequest,existingProduct);
-
         Product updatedProduct = productRepository.save(existingProduct);
-
         return ProductMapper.INSTANCE.updateProductResponseMapper(updatedProduct);
 
     }

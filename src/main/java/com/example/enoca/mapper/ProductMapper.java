@@ -13,9 +13,14 @@ import org.mapstruct.factory.Mappers;
 @Mapper
 public interface ProductMapper {
     ProductMapper INSTANCE = Mappers.getMapper(ProductMapper.class);
+
     GetProductResponse getProductResponseMapper(Product product);
+
     Product createProductMapper(CreateProductRequest createProductRequest);
+
     CreateProductResponse createProductResponseMapper(Product product);
+
     void updateProductMapper(UpdateProductRequest updateProductRequest,@MappingTarget Product existingProduct);
+
     UpdateProductResponse updateProductResponseMapper(Product product);
 }

@@ -13,13 +13,14 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CartItem extends BaseEntity{
+public class CartItem extends BaseEntity {
 
     private int quantity;
 
     @JsonIgnore
     @ManyToOne
     private Cart cart;
+
     @JsonIgnore
     @ManyToOne
     private Product product;

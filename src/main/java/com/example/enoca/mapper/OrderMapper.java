@@ -12,10 +12,13 @@ import org.mapstruct.factory.Mappers;
 @Mapper
 public interface OrderMapper {
     OrderMapper INSTANCE = Mappers.getMapper(OrderMapper.class);
+
     PlaceOrderResponse toPlaceOrderResponse(Order order);
+
     @Mapping(target = "productName", source = "productName")
     @Mapping(target = "productPrice", source = "productPrice")
     @Mapping(target = "quantity", source = "quantity")
     OrderItemResponse toOrderItemResponse(OrderItem orderItem);
+
     GetOrderResponse toGetOrderResponse(Order order);
 }

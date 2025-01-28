@@ -16,7 +16,6 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Map<String, String>> handleBusinessException(BusinessException ex) {
         return ResponseEntity.status(ex.getHttpStatus()).body(Map.of("errors", Collections.singletonList(ex.getError()).toString()));
     }
-
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();

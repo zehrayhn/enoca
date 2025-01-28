@@ -16,7 +16,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "orders")
-public class Order extends BaseEntity{
+public class Order extends BaseEntity {
+
     @Column(unique = true, nullable = false)
     private String orderCode;
 

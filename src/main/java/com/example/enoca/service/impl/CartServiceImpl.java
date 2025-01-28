@@ -29,6 +29,7 @@ public class CartServiceImpl implements CartService {
     private final CartRepository cartRepository;
     private final ProductService productService;
     private final CartServiceHelper cartServiceHelper;
+
     @Override
     public ResponseEntity<?> getCart(int cartId) {
         Cart cart=findCartById(cartId);
@@ -36,6 +37,7 @@ public class CartServiceImpl implements CartService {
                 ? ResponseEntity.ok("Sepet boş.")
                 : ResponseEntity.ok(CartMapper.INSTANCE.cartToGetCartResponse(cart));
     }
+
     @Override
     @Transactional
     public ResponseEntity<?> updateCart(int cartId, List<UpdateCartRequest> updateCartRequest) {
@@ -61,15 +63,14 @@ public class CartServiceImpl implements CartService {
         }
         return null;
     }
+
     @Override
     @Transactional
     public AddProductToCartResponse addProductToCart(int cartId, AddProductToCartRequest request) {
         Cart cart = findCartById(cartId);
         Product product = productService.findProductById(request.getProductId());
 
-
         //requestten gelen ürün ile aynı ürüne ait kartta ne kadar ürün varsa bunların adedini toplar
-
         int currentQuantityInCart = cart.getItems().stream()
                 .filter(item -> Objects.equals(item.getProduct().getId(), product.getId()))
                 .mapToInt(CartItem::getQuantity)
