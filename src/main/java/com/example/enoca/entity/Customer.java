@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
 import java.util.List;
 @Entity
 @Table(name="customers")
@@ -20,7 +19,8 @@ public class Customer extends BaseEntity {
 
   @OneToOne(mappedBy = "customer",cascade = CascadeType.ALL, orphanRemoval = true)
   private Cart cart;
-  @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+
+  @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true )
   private List<Order> orders;
 
 

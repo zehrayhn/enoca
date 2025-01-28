@@ -27,12 +27,6 @@ public class Cart extends BaseEntity{
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CartItem> items = new ArrayList<>();
 
-    @Transient
-    public double getTotalAmount() {
-        return items.stream()
-                .mapToDouble(item -> item.getQuantity() * item.getProduct().getPrice())
-                .sum();
-    }
 
 
 

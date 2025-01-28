@@ -67,6 +67,9 @@ public class CartServiceImpl implements CartService {
         Cart cart = findCartById(cartId);
         Product product = productService.findProductById(request.getProductId());
 
+
+        //requestten gelen ürün ile aynı ürüne ait kartta ne kadar ürün varsa bunların adedini toplar
+
         int currentQuantityInCart = cart.getItems().stream()
                 .filter(item -> Objects.equals(item.getProduct().getId(), product.getId()))
                 .mapToInt(CartItem::getQuantity)
@@ -147,11 +150,6 @@ public class CartServiceImpl implements CartService {
     @Transactional
     public void emptyCart(int cartId) {
         Cart cart = findCartById(cartId);
-        // Stokları geri yükle
-        for (CartItem item : cart.getItems()) {
-            item.getProduct().increaseStock(item.getQuantity());
-        }
-
         cart.getItems().clear();
         cart.setTotalAmount(0);
         cartRepository.save(cart);
